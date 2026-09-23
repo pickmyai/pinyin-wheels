@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f8f4e9">
+  <meta name="description" content="小學生普通話拼音遊戲：轉動聲母、韻母、聲調轉盤，跟讀錄音，再聽音找出正確拼音和漢字。">
+  <title>拼音轉轉樂｜聲母・韻母・聲調</title>
+  <link rel="stylesheet" href="./pinyin_wheels.css">
+  <script defer src="./pinyin_wheels.js"></script>
+</head>
+<body>
+  <div class="sky-deco star-one" aria-hidden="true">✦</div>
+  <div class="sky-deco star-two" aria-hidden="true">✧</div>
+  <div class="sky-deco cloud-one" aria-hidden="true">☁</div>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="拼音轉轉樂首頁"><span class="brand-mark">✦</span><span>拼音轉轉樂</span></a>
+      <a class="other-game" href="https://sentence-safari-snowy.vercel.app/sentence_safari.html">玩句子樂園 <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <span class="eyebrow"><span aria-hidden="true">★</span> 小一・普通話拼音探險</span>
+          <h1 id="hero-title">轉一轉，<br><em>讀出新聲音！</em></h1>
+          <p>跟住狐狸博士，將聲母、韻母同聲調拼埋一齊。聽一聽、讀一讀，再挑戰神奇聲音！</p>
+          <a class="hero-button" href="#game">開始玩 <span aria-hidden="true">↘</span></a>
+        </div>
+        <div class="hero-picture"><img src="assets/pinyin/fox-wheels.webp" width="1536" height="1024" alt="卡通狐狸博士在天空工房操作三個彩色轉盤"></div>
+        <div class="hero-sticker" aria-hidden="true">b + ā<br><strong>＝ bā!</strong></div>
+      </section>
+
+      <section id="game" class="game-section" aria-labelledby="game-heading">
+        <div class="section-heading"><div><span class="small-label">狐狸博士的拼音工房</span><h2 id="game-heading">準備好，開工啦！</h2></div><div class="progress-tools"><div id="star-count" class="star-count" aria-live="polite">★ 0 顆星</div><button id="reset-progress" class="reset-button" type="button">重設練習</button></div></div>
+        <div class="mode-switch" role="tablist" aria-label="選擇遊戲關卡">
+          <button id="tab-spin" class="mode-tab active" type="button" role="tab" aria-selected="true" aria-controls="spin-panel"><span class="tab-number">01</span><span><strong>轉盤拼讀</strong><small>轉一轉・跟住讀</small></span></button>
+          <button id="tab-listen" class="mode-tab" type="button" role="tab" aria-selected="false" aria-controls="listen-panel"><span class="tab-number">02</span><span><strong>聽音解碼</strong><small>聽聲音・4 選 1</small></span></button>
+        </div>
+
+        <section id="spin-panel" class="game-panel" role="tabpanel" aria-labelledby="tab-spin">
+          <div class="panel-heading"><div><span class="level-tag">第一關</span><h3>拼音魔法轉盤</h3><p>按「轉一轉」，睇吓今日拼到邊個字！</p></div><span id="spin-progress" class="progress-pill">0 / 5 次</span></div>
+          <div class="wheels" aria-label="聲母、韻母和聲調三個轉盤">
+            <div class="wheel-unit coral"><div class="wheel-title">① 聲母</div><div class="wheel-wrap"><div class="pointer" aria-hidden="true"></div><div id="wheel-initial" class="wheel-disc"><span class="wheel-symbol" id="initial-value">?</span></div></div><p>字的開頭</p></div>
+            <span class="math-sign" aria-hidden="true">＋</span>
+            <div class="wheel-unit aqua"><div class="wheel-title">② 韻母</div><div class="wheel-wrap"><div class="pointer" aria-hidden="true"></div><div id="wheel-final" class="wheel-disc"><span class="wheel-symbol" id="final-value">?</span></div></div><p>後面的聲音</p></div>
+            <span class="math-sign" aria-hidden="true">＋</span>
+            <div class="wheel-unit honey"><div class="wheel-title">③ 聲調</div><div class="wheel-wrap"><div class="pointer" aria-hidden="true"></div><div id="wheel-tone" class="wheel-disc"><span class="wheel-symbol" id="tone-value">?</span></div></div><p>聲音的高低</p></div>
+          </div>
+          <div class="spin-controls"><button id="spin-button" class="primary-button" type="button"><span aria-hidden="true">↻</span> 轉一轉</button><p>聲母＋帶調韻母＝完整拼音</p></div>
+          <div id="spin-result" class="result-card hidden" aria-live="polite">
+            <div class="result-art" id="result-emoji" aria-hidden="true">🌟</div>
+            <div class="result-main"><span class="result-kicker">我拼到啦！</span><div class="result-equation"><span id="result-initial">b</span><span>＋</span><span id="result-final">ā</span><span>＝</span><strong id="result-pinyin">bā</strong></div><div class="result-word"><span id="result-hanzi">八</span><span id="result-meaning">數字八</span></div></div>
+            <button id="speak-spin" class="sound-button" type="button" aria-label="播放示範讀音">🔊 <span>聽讀音</span></button>
+          </div>
+          <div id="record-panel" class="record-panel hidden"><div><strong>到你讀啦！</strong><p>跟讀一次。你可以錄音，再播放聽聽自己。</p></div><div class="record-actions"><button id="record-button" class="outline-button" type="button">🎙️ 開始錄音</button><button id="play-recording" class="outline-button" type="button" disabled>▶ 播放自己讀音</button><button id="read-done" class="outline-button done-button" type="button">我讀好了 ★</button></div><p id="record-status" class="record-status" role="status"></p></div>
+          <div class="level-footer"><span>完成 5 次拼讀，收集 5 顆星星！</span><button id="go-listen" class="text-button" type="button">去聽音解碼 ↗</button></div>
+        </section>
+
+        <section id="listen-panel" class="game-panel hidden" role="tabpanel" aria-labelledby="tab-listen">
+          <div class="panel-heading"><div><span class="level-tag blue-tag">第二關</span><h3>聽音解碼任務</h3><p>聽清楚，再逐步搵出聲母、韻母、聲調同漢字。</p></div><span id="quiz-progress" class="progress-pill">第 1 / 5 題</span></div>
+          <div id="quiz-body"></div>
+        </section>
+      </section>
+      <section class="learning-note"><span aria-hidden="true">💡</span><p><strong>小提示：</strong>例如 <b>b</b> ＋ <b>ā</b> ＝ <b>bā（八）</b>。先聽聲音，再留意聲調點樣升降。</p></section>
+    </main>
+    <footer>為小朋友而做的拼音練習・可以重試，慢慢學</footer>
+  </div>
+</body>
+</html>
