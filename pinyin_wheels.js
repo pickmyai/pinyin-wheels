@@ -121,6 +121,8 @@ try{const saved=JSON.parse(localStorage.getItem(PROGRESS_KEY)||'{}');progress.sp
 let currentWord=null,lastWord=null,spinPool=[],spinGeneration=0,spinning=false,spinAnswered=false,readCredited=false;
 let quizPool=shuffle(WORDS),quizWords=[],quizIndex=0,phase=0,locked=false,misses=0;
 let recorder=null,recordStream=null,recordChunks=[],recordUrl=null,recordTimer=null,recordAudio=null;
+let demonstrationAudio=null;
+const DEMONSTRATION_AUDIO_PATH='assets/pinyin/audio/azure-v1';
 
 function save(){try{localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress))}catch{}updateProgress()}
 function updateProgress(){
@@ -129,6 +131,7 @@ function updateProgress(){
   $('#quiz-progress').textContent=quizWords.length?`第 ${Math.min(quizIndex+1,5)} / 5 題`:'第 1 / 5 題';
 }
 function setMode(mode){
+  stopDemonstration();
   const listening=mode==='listen';
   $('#tab-spin').classList.toggle('active',!listening);$('#tab-spin').setAttribute('aria-selected',String(!listening));
   $('#tab-listen').classList.toggle('active',listening);$('#tab-listen').setAttribute('aria-selected',String(listening));
@@ -157,6 +160,7 @@ function flashStars(){
 }
 function spin(){
   if(spinning)return;
+  stopDemonstration();
   if(recorder?.state==='recording')stopRecording();
   if(!spinPool.length)spinPool=shuffle(WORDS.filter(w=>w!==lastWord));
   currentWord=spinPool.pop();lastWord=currentWord;spinning=true;spinAnswered=false;readCredited=false;
@@ -211,16 +215,36 @@ $('#read-done').addEventListener('click',()=>{
   if(progress.spin<5){progress.spin++;save();flashStars()}
 });
 
+function audioStatus(message=''){
+  $('#audio-status').textContent=message;
+  $('#audio-status').classList.toggle('hidden',!message);
+}
+function stopDemonstration(){
+  if(demonstrationAudio){demonstrationAudio.pause();demonstrationAudio=null}
+  audioStatus();
+}
 function playWord(word){
   if(!word)return;
-  if('speechSynthesis'in window)speechSynthesis.cancel();
-  const sound=new Audio(`assets/pinyin/audio/${word.id}.m4a`);
-  sound.onerror=()=>{if(!('speechSynthesis'in window)){alert('這個瀏覽器暫時無法播放示範聲音。');return}const u=new SpeechSynthesisUtterance(word.h);u.lang='zh-CN';u.rate=.72;const voices=speechSynthesis.getVoices();u.voice=voices.find(v=>v.lang.toLowerCase()==='zh-cn')||null;speechSynthesis.speak(u)};
-  sound.play().catch(()=>sound.onerror());
+  stopDemonstration();recordAudio?.pause();
+  const sound=new Audio(`${DEMONSTRATION_AUDIO_PATH}/${word.id}.mp3`);
+  demonstrationAudio=sound;
+  sound.preload='auto';
+  const failed=()=>{
+    if(demonstrationAudio!==sound)return;
+    audioStatus('讀音暫時無法載入，請檢查網絡後再次按下播放。');
+  };
+  sound.onerror=failed;
+  sound.onended=()=>{if(demonstrationAudio===sound)audioStatus()};
+  sound.play().catch(error=>{
+    if(demonstrationAudio!==sound)return;
+    if(error.name==='NotAllowedError')audioStatus('請再次按下播放讀音。');
+    else failed();
+  });
 }
 $('#speak-spin').addEventListener('click',()=>playWord(currentWord));
 
 async function startRecording(){
+  stopDemonstration();recordAudio?.pause();
   if(!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder){$('#record-status').textContent='這個瀏覽器未能錄音；你仍可以聆聽示範讀音並繼續遊戲。';return}
   try{
     recordStream=await navigator.mediaDevices.getUserMedia({audio:true});
@@ -239,7 +263,7 @@ async function startRecording(){
 }
 function stopRecording(){if(recorder?.state==='recording')recorder.stop()}
 $('#record-button').addEventListener('click',()=>recorder?.state==='recording'?stopRecording():startRecording());
-$('#play-recording').addEventListener('click',()=>{if(!recordUrl)return;recordAudio?.pause();recordAudio=new Audio(recordUrl);recordAudio.play()});
+$('#play-recording').addEventListener('click',()=>{if(!recordUrl)return;stopDemonstration();recordAudio?.pause();recordAudio=new Audio(recordUrl);recordAudio.play()});
 
 function startQuiz(){
   if(quizPool.length<5)quizPool=shuffle(WORDS.filter(w=>!quizWords.includes(w)));
@@ -255,6 +279,7 @@ function optionsFor(word){
 }
 function correctFor(word){return phase===0?word.i:phase===1?word.f:phase===2?TONES[word.t-1]:word.h}
 function renderQuiz(){
+  stopDemonstration();
   updateProgress();
   if(quizIndex>=5){$('#quiz-body').innerHTML=`<div class="quiz-final"><div class="complete-icon" aria-hidden="true">🏆</div><h4>解碼成功！</h4><p>你完成了 5 個聽音任務，獲得一枚拼音徽章！</p><button id="quiz-again" class="primary-button" type="button">再挑戰 5 題 ↻</button></div>`;$('#quiz-again').onclick=startQuiz;flashStars();return}
   const word=currentQuizWord();const steps=STAGES.map((s,n)=>`<span class="quiz-step ${n<phase?'done':n===phase?'current':''}">${n<phase?'✓ ':''}${s}</span>`).join('');
@@ -271,6 +296,7 @@ function choose(button){
   setTimeout(()=>{phase++;misses=0;locked=false;if(phase<4)renderQuiz();else completeQuizWord()},550);
 }
 function completeQuizWord(){
+  stopDemonstration();
   const word=currentQuizWord();
   if(progress.quiz<5){progress.quiz++;save()}
   $('#quiz-body').innerHTML=`<div class="quiz-complete"><span class="complete-icon" aria-hidden="true">${word.e}</span><p>你成功拼出這個聲音！</p><div><span class="big-pinyin">${syllable(word)}</span><span class="big-hanzi">${word.h}</span></div><p>${word.m}</p><button id="complete-listen" class="sound-button" type="button">🔊 再聽一次</button><br><button id="next-quiz" class="primary-button quiz-next" type="button">${quizIndex===4?'完成挑戰':'下一個聲音 →'}</button></div>`;

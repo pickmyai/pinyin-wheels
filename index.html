@@ -7,7 +7,7 @@
   <meta name="description" content="小學生普通話拼音遊戲：轉動聲母、韻母、聲調轉盤，跟讀錄音，再聽音找出正確拼音和漢字。">
   <title>拼音轉轉樂｜聲母・韻母・聲調</title>
   <link rel="stylesheet" href="./pinyin_wheels.css">
-  <script defer src="./pinyin_wheels.js"></script>
+  <script defer src="./pinyin_wheels.js?v=azure-v1"></script>
 </head>
 <body>
   <div class="sky-deco star-one" aria-hidden="true">✦</div>
@@ -61,6 +61,7 @@
           <div class="panel-heading"><div><span class="level-tag blue-tag">第二關</span><h3>聽音解碼任務</h3><p>仔細聆聽，依次選出聲母、韻母、聲調與漢字。</p></div><span id="quiz-progress" class="progress-pill">第 1 / 5 題</span></div>
           <div id="quiz-body"></div>
         </section>
+        <p id="audio-status" class="feedback-line hidden" role="status" aria-live="polite"></p>
       </section>
       <section class="learning-note"><span aria-hidden="true">💡</span><p><strong>小提示：</strong>例如 <b>b</b> ＋ <b>ā</b> ＝ <b>bā（八）</b>。先聆聽讀音，再留意聲調的高低變化。</p></section>
     </main>
