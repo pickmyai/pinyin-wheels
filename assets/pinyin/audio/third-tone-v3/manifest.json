@@ -1,0 +1,243 @@
+{
+  "profile": "genuine-human-third-tone-v3",
+  "sample_rate": 24000,
+  "channels": 1,
+  "codec": "mp3",
+  "bitrate": "96k",
+  "clips": {
+    "ba3": {
+      "source_file": "ba3.wav",
+      "sha256": "a7b5db5a044a8e9dce5a4509e65a0e8993957d8cbdae07840df03151d9142e52",
+      "duration_s": 1.44,
+      "speech_window": [
+        0.16,
+        1.6
+      ]
+    },
+    "bi3": {
+      "source_file": "bi3.wav",
+      "sha256": "0473d2bed3fbf963f2fc911b747355ca8c20cdf1e9622f29f66e7bfb1b31765f",
+      "duration_s": 0.94,
+      "speech_window": [
+        0.52,
+        1.46
+      ]
+    },
+    "bu3": {
+      "source_file": "bu3.wav",
+      "sha256": "95ead4437eab9c8e8788c4e2e039d6ad08a352f9e914b10b8f2d5c348c87fad3",
+      "duration_s": 0.96,
+      "speech_window": [
+        0.74,
+        1.7
+      ]
+    },
+    "da3": {
+      "source_file": "da3.wav",
+      "sha256": "2ee7cbfa7165389d70e2f27f43c597e65dd0dc38a43072bd465f54ec4e15cb60",
+      "duration_s": 0.94,
+      "speech_window": [
+        0.42,
+        1.36
+      ]
+    },
+    "di3": {
+      "source_file": "di3.wav",
+      "sha256": "fe17238d7a495d89bd60935c758008c8d12f367a1dbb7120441bdd5e9e3d89a9",
+      "duration_s": 0.96,
+      "speech_window": [
+        0.4,
+        1.36
+      ]
+    },
+    "fa3": {
+      "source_file": "fa3.wav",
+      "sha256": "5e4e8f6241a3b50ef43a5666326089fe2c26f47c1b9367ceddb6f69e9b63884a",
+      "duration_s": 0.96,
+      "speech_window": [
+        0.4,
+        1.36
+      ]
+    },
+    "fu3": {
+      "source_file": "fu3.wav",
+      "sha256": "7ebd43ed71b30fd4191a53f2ec6f9b72053a2e94e5941d8b2c279530867c1123",
+      "duration_s": 1.0,
+      "speech_window": [
+        0.46,
+        1.46
+      ]
+    },
+    "gu3": {
+      "source_file": "gu3.wav",
+      "sha256": "a9eaeb16a999fffabc14118bfa088c3c5484b47abdcfc1ecbc35262cdb3ae119",
+      "duration_s": 0.94,
+      "speech_window": [
+        0.46,
+        1.4
+      ]
+    },
+    "hu3": {
+      "source_file": "hu3.wav",
+      "sha256": "c066bdcebf306107dd00e23f9eb7e493781f5b7a3d802c59d4ebb60f04f1c35c",
+      "duration_s": 0.94,
+      "speech_window": [
+        0.56,
+        1.5
+      ]
+    },
+    "ji3": {
+      "source_file": "ji3.wav",
+      "sha256": "ee60709cdda96c4a80d6833c99dc3d90439074a95ac21952ee9a08ce3ca85f0a",
+      "duration_s": 1.04,
+      "speech_window": [
+        0.56,
+        1.6
+      ]
+    },
+    "ke3": {
+      "source_file": "ke3.wav",
+      "sha256": "0ef3e0f6ad068f49c7c5711ea0f831efc69ad769eb419215baee4698c49b10d2",
+      "duration_s": 0.98,
+      "speech_window": [
+        0.38,
+        1.36
+      ]
+    },
+    "ku3": {
+      "source_file": "ku3.wav",
+      "sha256": "39d4acb9af737b0e4277e20d88f219200c8166a12591977dfe895dfb55da4018",
+      "duration_s": 0.88,
+      "speech_window": [
+        0.6,
+        1.48
+      ]
+    },
+    "li3": {
+      "source_file": "li3.wav",
+      "sha256": "c78997a3e62054e9b348e806a1750286a676deda36b09cb73c4dc9de4b5e9a01",
+      "duration_s": 1.08,
+      "speech_window": [
+        0.4,
+        1.48
+      ]
+    },
+    "ma3": {
+      "source_file": "ma3.wav",
+      "sha256": "d8be566cd584637d3b8b7109ca9f08975febc54b6743a6a1d4544775345a9f9f",
+      "duration_s": 0.92,
+      "speech_window": [
+        0.54,
+        1.46
+      ]
+    },
+    "mi3": {
+      "source_file": "mi3.wav",
+      "sha256": "ca15663708dbf8b8b84438f148866240fb02ddd11c36f7209f39b24caa5b22e6",
+      "duration_s": 1.02,
+      "speech_window": [
+        0.32,
+        1.34
+      ]
+    },
+    "mu3": {
+      "source_file": "mu3.wav",
+      "sha256": "f62ca9c14e623cbe1d0cf0a18764aff5df4acfff73df2c2a99924d6f651d0255",
+      "duration_s": 1.04,
+      "speech_window": [
+        0.64,
+        1.68
+      ]
+    },
+    "na3": {
+      "source_file": "na3.wav",
+      "sha256": "2a41b8569b72f17909bdf154f232f0d67b1501f193063764f9bfd06d96475a72",
+      "duration_s": 1.1,
+      "speech_window": [
+        0.34,
+        1.44
+      ]
+    },
+    "ni3": {
+      "source_file": "ni3.wav",
+      "sha256": "aa606dbd350af3e784197aa981b454c4dfdec2005c59c1005ef248a3e055c3f0",
+      "duration_s": 1.1,
+      "speech_window": [
+        0.52,
+        1.62
+      ]
+    },
+    "nu3": {
+      "source_file": "nu3.wav",
+      "sha256": "bb30efb6ab9a070528363dd0050d8cd5a07ac34d346a04986be89511d933d6b3",
+      "duration_s": 1.08,
+      "speech_window": [
+        0.4,
+        1.48
+      ]
+    },
+    "nv3": {
+      "source_file": "nv3.wav",
+      "sha256": "124cc5f0b97bf631f1956fb0382b6a19abf8e7ee443b5ecb0355f94256c5b195",
+      "duration_s": 1.14,
+      "speech_window": [
+        0.24,
+        1.38
+      ]
+    },
+    "pu3": {
+      "source_file": "pu3.wav",
+      "sha256": "7b63adf304a3eb3b6d0bcc54076ec6662e0a770150ca9f63650387e4b56327eb",
+      "duration_s": 1.0,
+      "speech_window": [
+        0.6,
+        1.6
+      ]
+    },
+    "qi3": {
+      "source_file": "qi3.wav",
+      "sha256": "efcaf74bdbcfa8a3c0fa60fb158f2805f1ef3775b17d67d44dcfec880d2d238c",
+      "duration_s": 1.2,
+      "speech_window": [
+        0.32,
+        1.52
+      ]
+    },
+    "ta3": {
+      "source_file": "ta3.wav",
+      "sha256": "7ab7833826a1a4a08658c6842cdb04710449e762b0780bf77792811ca0b22851",
+      "duration_s": 1.04,
+      "speech_window": [
+        0.86,
+        1.9
+      ]
+    },
+    "ti3": {
+      "source_file": "ti3.wav",
+      "sha256": "06d6c203acfdcae4f2dc6b116db9803691f3d9c9172df3b955d6a215ddd152df",
+      "duration_s": 0.94,
+      "speech_window": [
+        0.62,
+        1.56
+      ]
+    },
+    "tu3": {
+      "source_file": "tu3.wav",
+      "sha256": "efd91f801b3309e0538f3464645cdbf62b378526e60252a2ef4437d312e25465",
+      "duration_s": 1.04,
+      "speech_window": [
+        0.56,
+        1.6
+      ]
+    },
+    "xi3": {
+      "source_file": "xi3.wav",
+      "sha256": "89ad1682e8ab87db72697e11a20253b854cebf024960d6897e2e2fe4b2a72dad",
+      "duration_s": 0.94,
+      "speech_window": [
+        0.4,
+        1.34
+      ]
+    }
+  }
+}

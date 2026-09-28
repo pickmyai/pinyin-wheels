@@ -10,21 +10,13 @@
 
 ## 預先生成 Azure 示範讀音
 
-兩個遊戲模式均使用預生成 MP3，不在學生裝置即時合成，也不會退回瀏覽器 TTS。第一、二、四聲播放 `assets/pinyin/audio/azure-v1/<拼音ID>.mp3`；第三聲播放 `assets/pinyin/audio/third-tone-v2/<拼音ID>.mp3`。原始音檔使用 Azure 普通話女聲 `zh-CN-XiaoxiaoNeural`、語速 `-25%`；SSML 明確指定每個音節及聲調，例如 `ba 3`（把）、`nv 3`（女），避免多音字由文字自動猜音。
+兩個遊戲模式均使用預生成 MP3，不在學生裝置即時合成，也不會退回瀏覽器 TTS。第一、二、四聲播放 `assets/pinyin/audio/azure-v1/<拼音ID>.mp3`（Azure 普通話女聲 `zh-CN-XiaoxiaoNeural`、語速 `-25%`）；第三聲（共 26 個音節）播放 `assets/pinyin/audio/third-tone-v3/<拼音ID>.mp3`（採用普通話母語者真人錄製、端點平滑修剪及標準化音量後的 Mono 24kHz / 96kbps MP3），確保單字孤立第三聲具備小學拼音教學所要求的純正「凹調（214 先降後升）」聽感。
 
-Azure 的單字第三聲尾段回升較弱。現有第三聲檔以 Praat 重疊相加延長有聲段並調整基頻；雖然量得出降後升，用戶實際聽感仍像第一／二聲，**未通過教學讀音驗收**。這個版本只暫時保留，下一步改用普通話母語者的孤立字錄音。Microsoft 的 [SSML 文件](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody) 指出 `contour` 對單字及短句不起作用，所以不再繼續靠 Azure 單字 SSML 修此問題。
-
-新增字庫項目後，用 Python 3 與 `ffprobe` 預先補齊音檔：
+新增或替換真人錄音時，可使用工具腳本：
 
 ```sh
-# 憑證從環境變數讀取；也可傳 --env-file /path/to/local.env。
-# 只使用 AZURE_TTS_KEY 與 AZURE_TTS_URL，不會寫入音檔清單或網站。
-python3 scripts/generate_azure_audio.py
-python3 scripts/generate_azure_audio.py --check
-# 第三聲在 Azure 原檔生成／核對後處理；僅開發機需要此套件。
-python3 -m pip install -r scripts/requirements-third-tone.txt
-python3 scripts/improve_third_tones.py
-python3 scripts/improve_third_tones.py --check
+# 處理並匯入真人第三聲錄音（自動裁切靜音、淡入淡出、轉碼 MP3 及生成 manifest.json）
+python3 scripts/import_human_recordings.py --recordings-dir /path/to/extracted_zip
 ```
 
 `AZURE_TTS_URL` 是所屬 Azure region 的 `https://<region>.tts.speech.microsoft.com/cognitiveservices/v1`。

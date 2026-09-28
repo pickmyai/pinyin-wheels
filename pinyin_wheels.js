@@ -123,7 +123,7 @@ let quizPool=shuffle(WORDS),quizWords=[],quizIndex=0,phase=0,locked=false,misses
 let recorder=null,recordStream=null,recordChunks=[],recordUrl=null,recordTimer=null,recordAudio=null;
 let demonstrationAudio=null;
 const DEMONSTRATION_AUDIO_PATH='assets/pinyin/audio/azure-v1';
-const THIRD_TONE_AUDIO_PATH='assets/pinyin/audio/third-tone-v2';
+const THIRD_TONE_AUDIO_PATH='assets/pinyin/audio/third-tone-v3';
 
 function save(){try{localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress))}catch{}updateProgress()}
 function updateProgress(){
