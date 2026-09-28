@@ -1,0 +1,161 @@
+{
+  "profile": "isolated-third-tone-dip-rise-v1",
+  "clips": {
+    "ba3": {
+      "source_sha256": "0fea07ecc6f0e5d784c87b6fbd2c07d0b6db56fbb397f4f7d23aae3bfb117aaf",
+      "sha256": "5be88ed597c49cbfa11a6106d9f1f66f268b2c799b88214ff7f11d1363a0eec2",
+      "baseline_hz": 215.7
+    },
+    "bi3": {
+      "source_sha256": "d95fe963b060949d3510689a71aae21f22a42ef1455accb98a13a7cd0f657fc7",
+      "sha256": "021ba84c8d0a12310aa7ce0f259d6092466a3648906ad1b64519f3c92577f5a7",
+      "baseline_hz": 220.9
+    },
+    "bu3": {
+      "source_sha256": "c661a4b58b446c94f12a5efec829cc37e48e1b283fdca23d7c82da20c0c55fe0",
+      "sha256": "0e84995ebe60bd4b5aa9acbb1800a717da2bdcaa3052be913ac96c6aefc7500a",
+      "baseline_hz": 208.4
+    },
+    "da3": {
+      "source_sha256": "16232c6fa27c2bae44da1948c27ba074509182b772b707ae5da1ec9e5b4e364c",
+      "sha256": "ce5e87ca6c7e4882af233e578d34faf5ca3b95e6c0f07f60136515e9b90e8345",
+      "baseline_hz": 207.0
+    },
+    "di3": {
+      "source_sha256": "c37bb85b278af660315fb261198a265a8379c5695298874bc5e272877c9fd7b8",
+      "sha256": "256374ae2ee55673dff6bd7c5f25b1b3e8f5c8370e6f7b6e544194a8e147e32a",
+      "baseline_hz": 214.4
+    },
+    "fa3": {
+      "source_sha256": "c4969dbed7aefb7a6a7d409a562c2cb67803a34e00a4d95e0ed70ecefae44947",
+      "sha256": "bdd406a773f7df2208bc3bc2e244c1440d7a51646ab15495b67112212039382e",
+      "baseline_hz": 208.9
+    },
+    "fu3": {
+      "source_sha256": "62bb884412e68fb067cc13a5cf2a8aa32cc1227f2db2f14a7a64f40c0f68c489",
+      "sha256": "bc338b5f68784ff9759742a67781daffa87dd72e907af7e12bdcbb044940251b",
+      "baseline_hz": 206.4
+    },
+    "gu3": {
+      "source_sha256": "45c19dbf0cd574aac088a274137c3454fecb66494720b2654c728833ac6ff288",
+      "sha256": "3d9426707e5e4dc51b7ec84084f9df067bdcc8c22d3e10c037d8227d2b36084e",
+      "baseline_hz": 203.8
+    },
+    "hu3": {
+      "source_sha256": "b57fc57ae62315c5d9ead5280f1a29173ce0294be65dd95e3932b4a359d96adb",
+      "sha256": "5445c80d9d2d8cb5090314d4baeb3d7c4b9d7a06e7ab4114ccb81d4b1e5b3971",
+      "baseline_hz": 196.0
+    },
+    "ji3": {
+      "source_sha256": "785ed9f660bb37528a666a379ff351e1214b79a3ce02915f2a78dc872b5cdc96",
+      "sha256": "8c860f66acaf201a1748368581400edd7cd2393223e702bcd3813a2044689402",
+      "baseline_hz": 216.1
+    },
+    "ke3": {
+      "source_sha256": "6b79c618ddba473c2bbf3b2ca2abf8579178772e78a860bba972e81d8868825b",
+      "sha256": "042c4b75e82c71c247cba5c179e49281e987a953e3937567e11c71ed51479c71",
+      "baseline_hz": 215.4
+    },
+    "ku3": {
+      "source_sha256": "c127bfbf4b7f6ef97cde63ccf944cee040cb0ac3c52e95f6cbba94fac0f17604",
+      "sha256": "f674d74fbd3541783ed578b435d59e203d683329eca98883006856f6403d4bff",
+      "baseline_hz": 199.2
+    },
+    "li3": {
+      "source_sha256": "220023361826f2f49a184794e53b2aab658f1d42a571649ffba1996b56daad44",
+      "sha256": "2f9dcb5dd58cbb3bef1f477619647cd0204e9ae012caa08038422290f834f671",
+      "baseline_hz": 219.1
+    },
+    "ma3": {
+      "source_sha256": "05b6a79ceb2c43e0796b3a6ef260bfa2842a9eda393426daf83edea1fa2b7bf8",
+      "sha256": "d71a300c9dabafe132b632ee14c8ece6d31278a7a2ed1ab956a5e0975718dd43",
+      "baseline_hz": 213.6
+    },
+    "mi3": {
+      "source_sha256": "250846362721e19aeacf103437444a7846004dd71a11f3283fd4044c33cb0d01",
+      "sha256": "688046218a16001492f97944a8fa14bf827c0d90a5ff2e48fc4f84dfc983990e",
+      "baseline_hz": 218.2
+    },
+    "mu3": {
+      "source_sha256": "289d9df94b0a9c7aa327a996f3c4b286f0c1578945c49117767c9e47f3035002",
+      "sha256": "ac27e9697ed6dbdb807e2b3031a43b348823ae49744ffee26d366be803022d58",
+      "baseline_hz": 213.7
+    },
+    "na3": {
+      "source_sha256": "90e0ecf95deb8b7d50720c976eb5a0d7d79ebb2abd1d3833ef8acb577e25e25d",
+      "sha256": "885b88e736c6a851f7de05d136bceda53e9907135627fa5c11f5981bdd93c672",
+      "baseline_hz": 219.4
+    },
+    "ni3": {
+      "source_sha256": "ab6c68173143552067ad9f7463a6ad8b2086ab4d55103d4cb47249c478cefc00",
+      "sha256": "09dcc9199803d0894d8f59894fe86a28272e76e5cb3f23eb37f5c18c2db208e9",
+      "baseline_hz": 223.7
+    },
+    "nu3": {
+      "source_sha256": "b16a0729c42d9692096d1eb0ff8619b9ebefdc7d5a6b40be4c2678f485ec5035",
+      "sha256": "3a308076d03d34ea70e62d873b251118a6ab58d0bcbe0ce2b9e16d6ff80e3976",
+      "baseline_hz": 214.4
+    },
+    "nv3": {
+      "source_sha256": "b8c534193ed8b1195c268efa481d5716fe6f52087a39ff64ae94684df5440e64",
+      "sha256": "4d8b0acecfaad4a560c48fab11904b7324cf20bda964c9049d43f9e991142a38",
+      "baseline_hz": 222.4
+    },
+    "pu3": {
+      "source_sha256": "de1b93fa3da2f2e28e5880439c7fd48aa776b1f3eabbdd99ca71db23f6a98166",
+      "sha256": "171284a21eadd061aa7049423fd9b337a1b7143d967fb206e752adbd037ba78a",
+      "baseline_hz": 209.1
+    },
+    "qi3": {
+      "source_sha256": "7e04113b7dc023e2c3a7f4b5256432661b908aeace474adb62dbbdac7b0fcbb7",
+      "sha256": "a8bef1d4c709b1ba4724272a88f99596408bda4acfc4cf96bc2c5952c11b94e5",
+      "baseline_hz": 212.4
+    },
+    "ta3": {
+      "source_sha256": "48114591115045fb7679bdea4876ac94d4525ff2aafa4a5ed52a0fca69b25160",
+      "sha256": "0647973cc1f0da077e8c893e8618fb988522c6f2b1b7a0f3d3b93be24eb0bfee",
+      "baseline_hz": 207.2
+    },
+    "ti3": {
+      "source_sha256": "205129f4f8c5080411e371f8356c1b1aba95c7c9c8a7b814e6c638786663ff2e",
+      "sha256": "7513528264b30b54f71f161ddeb0ae9237d7ca9605bdadcddd7923daa09344f8",
+      "baseline_hz": 215.9
+    },
+    "tu3": {
+      "source_sha256": "a907f6464a2c633a68fa84dcfc2d4428e6cd77ac45fb81a7e722595511622b25",
+      "sha256": "6ad6a3787ab3d80ae7bdce33545af197a2d32894f2a71a695e7aafb24e59face",
+      "baseline_hz": 206.6
+    },
+    "xi3": {
+      "source_sha256": "f58739800ec2876abc79341f9507850ae3c42f4da88db2aec89be093129ef537",
+      "sha256": "fc4dee4be7c1e43b6288600117b6c49087fdb0ab954fcfb2838999f2dd22c294",
+      "baseline_hz": 209.9
+    }
+  },
+  "settings": {
+    "profile": "isolated-third-tone-dip-rise-v1",
+    "contour": [
+      [
+        0,
+        1.05
+      ],
+      [
+        0.22,
+        0.9
+      ],
+      [
+        0.55,
+        0.78
+      ],
+      [
+        0.72,
+        0.8
+      ],
+      [
+        1,
+        1.27
+      ]
+    ],
+    "vowel_duration_peak": 1.5
+  }
+}

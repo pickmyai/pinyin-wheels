@@ -123,6 +123,7 @@ let quizPool=shuffle(WORDS),quizWords=[],quizIndex=0,phase=0,locked=false,misses
 let recorder=null,recordStream=null,recordChunks=[],recordUrl=null,recordTimer=null,recordAudio=null;
 let demonstrationAudio=null;
 const DEMONSTRATION_AUDIO_PATH='assets/pinyin/audio/azure-v1';
+const THIRD_TONE_AUDIO_PATH='assets/pinyin/audio/third-tone-v2';
 
 function save(){try{localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress))}catch{}updateProgress()}
 function updateProgress(){
@@ -226,7 +227,8 @@ function stopDemonstration(){
 function playWord(word){
   if(!word)return;
   stopDemonstration();recordAudio?.pause();
-  const sound=new Audio(`${DEMONSTRATION_AUDIO_PATH}/${word.id}.mp3`);
+  const path=word.t===3?THIRD_TONE_AUDIO_PATH:DEMONSTRATION_AUDIO_PATH;
+  const sound=new Audio(`${path}/${word.id}.mp3`);
   demonstrationAudio=sound;
   sound.preload='auto';
   const failed=()=>{
