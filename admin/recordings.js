@@ -122,7 +122,10 @@ function selectItem(id) {
   if (!item || (!item.pilot && !pilotApproved())) return;
   stopPlayback();
   currentId = id;
-  status(clips.has(id) ? '先完整重聽，再決定是否標記可用。' : '請只讀一個字，按開始錄音。');
+  const clip = clips.get(id);
+  status(clip ? clip.levelWarning ||
+    `錄音已調整音量${clip.gainDb > 0 ? ` +${clip.gainDb.toFixed(1)} dB` : ''}；請完整重聽。`
+    : '請只讀一個字，按開始錄音。');
   render();
 }
 
@@ -164,6 +167,87 @@ function stopMeter() {
   document.querySelectorAll('.meter span').forEach(bar => { bar.style.height = ''; });
 }
 
+function wavBlob(samples, sampleRate, gain) {
+  const bytes = new ArrayBuffer(44 + samples.length * 2);
+  const view = new DataView(bytes);
+  const write = (offset, value) => {
+    for (let i = 0; i < value.length; i++) view.setUint8(offset + i, value.charCodeAt(i));
+  };
+  write(0, 'RIFF'); view.setUint32(4, bytes.byteLength - 8, true); write(8, 'WAVE');
+  write(12, 'fmt '); view.setUint32(16, 16, true); view.setUint16(20, 1, true);
+  view.setUint16(22, 1, true); view.setUint32(24, sampleRate, true);
+  view.setUint32(28, sampleRate * 2, true); view.setUint16(32, 2, true);
+  view.setUint16(34, 16, true); write(36, 'data');
+  view.setUint32(40, samples.length * 2, true);
+  for (let i = 0; i < samples.length; i++) {
+    const value = Math.max(-1, Math.min(1, samples[i] * gain));
+    view.setInt16(44 + i * 2, value < 0 ? value * 32768 : value * 32767, true);
+  }
+  return new Blob([bytes], { type: 'audio/wav' });
+}
+
+async function normalizeRecording(blob) {
+  const Context = window.AudioContext || window.webkitAudioContext;
+  if (!Context) throw Error('瀏覽器不支援自動聲量調整。');
+  const context = new Context();
+  try {
+    const decoded = await context.decodeAudioData(await blob.arrayBuffer());
+    if (decoded.duration < .2 || decoded.duration > 12) throw Error('錄音長度不合適，請重錄。');
+    const samples = new Float32Array(decoded.length);
+    for (let channel = 0; channel < decoded.numberOfChannels; channel++) {
+      const input = decoded.getChannelData(channel);
+      for (let i = 0; i < samples.length; i++) samples[i] += input[i] / decoded.numberOfChannels;
+    }
+    let peak = 0;
+    const frameSize = Math.max(1, Math.round(decoded.sampleRate * .02));
+    const frames = [];
+    for (let start = 0; start < samples.length; start += frameSize) {
+      let sum = 0;
+      const end = Math.min(samples.length, start + frameSize);
+      for (let i = start; i < end; i++) {
+        const value = samples[i];
+        peak = Math.max(peak, Math.abs(value));
+        sum += value * value;
+      }
+      frames.push(Math.sqrt(sum / (end - start)));
+    }
+    const loudest = Math.max(...frames);
+    if (loudest < .004 || peak < .008) throw Error('麥克風收音太細，請靠近麥克風重錄。');
+    const active = frames.filter(value => value >= Math.max(.004, loudest * .18)).sort((a, b) => a - b);
+    const activeRms = active[Math.floor(active.length / 2)];
+    const gain = Math.min(12, .13 / activeRms, .88 / peak);
+    const gainDb = Math.round(20 * Math.log10(gain) * 10) / 10;
+    const levelWarning = activeRms * gain < .045
+      ? '原始收音仍太細；已盡量調整，但請靠近麥克風重新錄製。'
+      : peak > .98 ? '原始收音有爆音；請離開麥克風一點並重錄。' : '';
+    return { blob: wavBlob(samples, decoded.sampleRate, gain), gainDb,
+      durationMs: Math.round(decoded.duration * 1000), levelWarning };
+  } finally { await context.close(); }
+}
+
+async function upgradeOlderClips() {
+  let upgraded = 0;
+  for (const clip of clips.values()) {
+    if (clip.normalized) continue;
+    try {
+      const result = await normalizeRecording(clip.blob);
+      clip.sourceBlob = clip.blob;
+      clip.sourceMimeType = clip.mimeType;
+      clip.blob = result.blob;
+      clip.mimeType = 'audio/wav';
+      clip.gainDb = result.gainDb;
+      clip.levelWarning = result.levelWarning;
+      clip.durationMs = result.durationMs;
+      clip.normalized = true;
+      clip.listened = false;
+      clip.approved = false;
+      await databaseRequest('put', clip);
+      upgraded++;
+    } catch { /* Keep the original take if this browser cannot decode it. */ }
+  }
+  return upgraded;
+}
+
 async function beginRecording() {
   if (requestingMicrophone || comparing) return;
   if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) {
@@ -175,7 +259,7 @@ async function beginRecording() {
     requestingMicrophone = true;
     render();
     stream = await navigator.mediaDevices.getUserMedia({ audio: {
-      echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
+      echoCancellation: false, noiseSuppression: false, autoGainControl: true } });
     requestingMicrophone = false;
     const selectedMime = mimeType();
     recorder = new MediaRecorder(stream, selectedMime ? { mimeType: selectedMime } : undefined);
@@ -195,11 +279,19 @@ async function beginRecording() {
       try {
         const blob = new Blob(chunks, { type: finished.mimeType || chunks[0]?.type || 'audio/webm' });
         if (blob.size < 1000) throw Error('錄音太短或沒有收到聲音，請重試。');
-        const take = { id: recordingId, blob, mimeType: blob.type, createdAt: new Date().toISOString(),
-          durationMs: Date.now() - recordingStarted, listened: false, approved: false };
+        let processed;
+        try { processed = await normalizeRecording(blob); }
+        catch (error) { processed = { blob, durationMs: Date.now() - recordingStarted,
+          levelWarning: `原音已保存，但${error.message || '音量調整失敗'}；請重聽或重錄。` }; }
+        const take = { id: recordingId, blob: processed.blob, sourceBlob: blob,
+          mimeType: processed.blob.type, sourceMimeType: blob.type,
+          createdAt: new Date().toISOString(), durationMs: processed.durationMs,
+          gainDb: processed.gainDb, levelWarning: processed.levelWarning,
+          normalized: !!processed.gainDb || processed.gainDb === 0,
+          listened: false, approved: false };
         await databaseRequest('put', take);
         clips.set(recordingId, take);
-        status('已儲存在本機。請完整重聽，再標記可用。');
+        status(take.levelWarning || `已調整音量${take.gainDb > 0 ? ` +${take.gainDb.toFixed(1)} dB` : ''}，並儲存在本機。請完整重聽。`, !!take.levelWarning);
       } catch (error) { status(error.message || '錄音儲存失敗，請重試。', true); }
       render();
     };
@@ -245,6 +337,7 @@ async function playClip(id, markListened = true) {
 }
 
 function extension(mime) {
+  if (mime.includes('wav')) return 'wav';
   if (mime.includes('mp4')) return 'm4a';
   if (mime.includes('ogg')) return 'ogg';
   if (mime.includes('webm')) return 'webm';
@@ -301,7 +394,8 @@ async function exportClips(kind) {
     files.push({ name, data });
     metadata.push({ id: item.id, character: item.character, pinyin: item.pinyin,
       file: name, mime_type: clip.mimeType, bytes: data.length, sha256: hash,
-      duration_ms: clip.durationMs, recorded_at: clip.createdAt });
+      duration_ms: clip.durationMs, recorded_at: clip.createdAt,
+      normalization_db: clip.gainDb ?? null, level_warning: clip.levelWarning || null });
   }
   files.unshift({ name: 'manifest.json', data: new TextEncoder().encode(JSON.stringify({
     schema: 1, project: 'pinyin-wheels', kind, exported_at: new Date().toISOString(), clips: metadata
@@ -327,8 +421,10 @@ async function init() {
     if (items.length !== 29 || items.some(item => !item)) throw Error('錄音字庫不完整。');
     database = await openDatabase();
     clips = new Map((await databaseRequest('getAll')).map(clip => [clip.id, clip]));
+    const upgraded = await upgradeOlderClips();
     render();
-    status('先錄四聲試音。按開始錄音，讀完一個字便停止。');
+    status(upgraded ? `已調整 ${upgraded} 條舊錄音的聲量；請重新重聽並標記可用。`
+      : '先錄四聲試音。按開始錄音，讀完一個字便停止。');
   } catch (error) {
     status(error.message || '錄音室無法啟動。', true);
     $('#record-button').disabled = true;
