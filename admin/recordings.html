@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#173f46">
+  <title>示範讀音錄音室｜拼音轉轉樂</title>
+  <link rel="stylesheet" href="./recordings.css">
+  <script defer src="./recordings.js"></script>
+</head>
+<body>
+  <div class="studio-shell">
+    <header class="topbar">
+      <a class="brand" href="../" aria-label="返回拼音轉轉樂"><span class="brand-symbol">✦</span> 拼音轉轉樂</a>
+      <span class="topbar-label">示範讀音錄音室 <span class="beta">ADMIN TOOL</span></span>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div class="intro-copy">
+          <p class="kicker">VOICE STUDIO / 普通話讀音</p>
+          <h1 id="page-title">把真正的<br><em>第三聲</em>錄進來。</h1>
+          <p>先完成「媽、麻、馬、罵」四聲對照。確認「馬」聽起來是自然的孤立第三聲，再錄其餘 25 個字；「馬」只需錄一次。錄音只存在這部裝置的瀏覽器，匯出後才會交給網站維護者。</p>
+          <a class="intro-action" href="#recording-card">開始試音 <span aria-hidden="true">↘</span></a>
+        </div>
+        <div class="tone-art" aria-hidden="true"><span class="tone-art-label">第三聲 / TONE 03</span><svg viewBox="0 0 380 190" role="presentation"><path class="art-guide" d="M25 28H355M25 94H355M25 160H355"/><path class="art-curve" d="M30 70 C105 72 104 148 194 145 S292 68 350 54"/><circle cx="194" cy="145" r="9"/></svg><span class="tone-art-caption">先低下去，末段自然回升</span></div>
+      </section>
+
+      <section class="notice" aria-label="錄音儲存說明"><span class="notice-icon">i</span><p><strong>本頁沒有登入或伺服器上傳。</strong>知道網址的人都可開啟工具，但只能存取自己瀏覽器的錄音。請用固定裝置完成，勿用無痕模式；匯出 ZIP 後再交給網站維護者。</p></section>
+
+      <div class="workspace">
+        <aside class="sidebar" aria-label="錄音清單">
+          <div class="side-head"><span class="eyebrow">錄音流程</span><h2>選擇音節</h2><p id="progress-text">載入中…</p><div class="progress-track"><span id="progress-fill"></span></div></div>
+          <div class="group-head"><span>01 / 四聲試音</span><span id="pilot-count">0 / 4</span></div>
+          <div id="pilot-list" class="item-list"></div>
+          <div class="group-head third-head"><span>02 / 第三聲字庫</span><span id="third-count">0 / 26</span></div>
+          <div id="third-list" class="item-list"></div>
+        </aside>
+
+        <section id="recording-card" class="recording-panel" aria-labelledby="recording-title">
+          <div class="panel-top"><span id="stage-label" class="stage-label">四聲試音</span><span id="item-position" class="position">01 / 29</span></div>
+          <div class="word-stage"><div class="word-orbit" aria-hidden="true"></div><span id="word-character" class="character">馬</span><div class="word-meta"><strong id="word-pinyin">mǎ</strong><span id="word-tone">第三聲</span></div></div>
+          <h2 id="recording-title">聽得到低點，才算第三聲。</h2>
+          <p id="recording-hint" class="recording-hint">請只讀畫面上的一個字，不加「請讀」或例句。自然發音，保留低點與尾段回升。</p>
+          <div class="meter" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <p id="status" class="status" role="status" aria-live="polite">選擇字詞後即可開始錄音。</p>
+          <div class="controls"><button id="record-button" class="record-button" type="button"><span class="record-dot"></span><span id="record-label">開始錄音</span></button><button id="play-button" class="secondary-button" type="button" disabled>▶ 重聽本條</button><button id="compare-button" class="secondary-button" type="button" disabled>♫ 連聽四聲</button></div>
+          <div class="review"><div><span class="eyebrow">錄完後</span><p>完整重聽一次，再標記可用；不滿意就重錄。</p></div><button id="approve-button" class="approve-button" type="button" disabled>✓ 標記可用</button></div>
+          <div class="panel-footer"><button id="previous-button" type="button">← 上一條</button><button id="next-button" type="button">下一條 →</button></div>
+        </section>
+      </div>
+
+      <section class="export-panel" aria-labelledby="export-title"><div><span class="eyebrow">HANDOFF</span><h2 id="export-title">匯出錄音，交付審聽</h2><p>試音四條可先匯出；全部 29 條通過後可匯出完整 ZIP。音檔保留原始格式，內附字詞、格式和 SHA-256 清單。</p></div><div class="export-actions"><button id="pilot-export" type="button" disabled>匯出四聲試音</button><button id="full-export" type="button" disabled>匯出完整錄音</button></div></section>
+    </main>
+    <footer>拼音轉轉樂 · 管理錄音工具 · 音檔不會自動上線</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,205 @@
+[
+  {
+    "id": "ba3",
+    "character": "把",
+    "pinyin": "bǎ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "bi3",
+    "character": "筆",
+    "pinyin": "bǐ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "bu3",
+    "character": "補",
+    "pinyin": "bǔ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "pu3",
+    "character": "普",
+    "pinyin": "pǔ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "ma1",
+    "character": "媽",
+    "pinyin": "mā",
+    "tone": 1,
+    "pilot": true
+  },
+  {
+    "id": "ma2",
+    "character": "麻",
+    "pinyin": "má",
+    "tone": 2,
+    "pilot": true
+  },
+  {
+    "id": "ma3",
+    "character": "馬",
+    "pinyin": "mǎ",
+    "tone": 3,
+    "pilot": true
+  },
+  {
+    "id": "ma4",
+    "character": "罵",
+    "pinyin": "mà",
+    "tone": 4,
+    "pilot": true
+  },
+  {
+    "id": "mi3",
+    "character": "米",
+    "pinyin": "mǐ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "mu3",
+    "character": "母",
+    "pinyin": "mǔ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "fa3",
+    "character": "法",
+    "pinyin": "fǎ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "fu3",
+    "character": "斧",
+    "pinyin": "fǔ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "da3",
+    "character": "打",
+    "pinyin": "dǎ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "di3",
+    "character": "底",
+    "pinyin": "dǐ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "ta3",
+    "character": "塔",
+    "pinyin": "tǎ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "ti3",
+    "character": "體",
+    "pinyin": "tǐ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "tu3",
+    "character": "土",
+    "pinyin": "tǔ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "na3",
+    "character": "哪",
+    "pinyin": "nǎ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "ni3",
+    "character": "你",
+    "pinyin": "nǐ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "nu3",
+    "character": "努",
+    "pinyin": "nǔ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "nv3",
+    "character": "女",
+    "pinyin": "nǚ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "li3",
+    "character": "李",
+    "pinyin": "lǐ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "gu3",
+    "character": "鼓",
+    "pinyin": "gǔ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "ke3",
+    "character": "可",
+    "pinyin": "kě",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "ku3",
+    "character": "苦",
+    "pinyin": "kǔ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "hu3",
+    "character": "虎",
+    "pinyin": "hǔ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "ji3",
+    "character": "擠",
+    "pinyin": "jǐ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "qi3",
+    "character": "起",
+    "pinyin": "qǐ",
+    "tone": 3,
+    "pilot": false
+  },
+  {
+    "id": "xi3",
+    "character": "洗",
+    "pinyin": "xǐ",
+    "tone": 3,
+    "pilot": false
+  }
+]
