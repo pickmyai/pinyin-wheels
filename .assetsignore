@@ -1,0 +1,12 @@
+.git
+.github
+.vercel
+.wrangler
+wrangler.jsonc
+.assetsignore
+vercel.json
+node_modules
+*.py
+__pycache__
+.DS_Store
+README.md
